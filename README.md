@@ -2,6 +2,8 @@
 
 Redux Interval Middleware
 
+You can look at the [demo](https://codesandbox.io/s/redux-interval-middleware-example-xfuso) application.
+
 ## Setup
 
 ## Install Package
@@ -25,7 +27,7 @@ const store = createStore(todos, ['Use Redux'], applyMiddleware(intervalMiddlewa
 // const store = createStore(
 //   todos,
 //   ['Use Redux'],
-//   applyMiddleware(intervalMiddleware.withExtraArgument(api))
+//   applyMiddleware(intervalMiddleware.withExtraArgument({api}))
 // );
 ```
 
@@ -37,12 +39,12 @@ The Middleware catches the type of action equal to INTERVAL.
 
 ```js
 dispatch({
-  type: 'INTERVAL', // type has to equal "INTERVAL".
+  type: 'INTERVAL', // type has to be "INTERVAL".
   payload: {
     name: 'FETCH_FROM_TYPICODE',
     time: 10, // period second
     runNow: true, // run immediately otherwise it will wait until the time to run.
-    command: 'start', // start interval
+    command: 'start', // This command starts interval job
     // this our callback function
     callback: (dispatch, getStore, extraArgument) => {
       fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -60,10 +62,10 @@ dispatch({
 
 ```js
 dispatch({
-  type: 'INTERVAL', // type has to equal "INTERVAL".
+  type: 'INTERVAL', // type has to be "INTERVAL".
   payload: {
     name: 'FETCH_FROM_TYPICODE',
-    command: 'stop' // stop it
+    command: 'stop' // This command stops interval job
   }
 });
 ```
@@ -72,9 +74,9 @@ dispatch({
 
 ```js
 dispatch({
-  type: 'INTERVAL', // type has to equal "INTERVAL".
+  type: 'INTERVAL', // type has to be "INTERVAL".
   payload: {
-    command: 'stopAll' // stop all interval jobs
+    command: 'stopAll' // This command stops all interval jobs
   }
 });
 ```
@@ -83,17 +85,15 @@ dispatch({
 
 ```js
 useEffect(() => {
-  // Set LOADER
-  loading(true); // dispatch something about loader
 
   const ID = 1; // it might be coming from url
 
   dispatch({
-    type: 'INTERVAL', // type has to equal "INTERVAL".
+    type: 'INTERVAL', // The type has to be "INTERVAL".
     payload: {
       name: 'FETCH_FROM_TYPICODE',
-      time: 10, // period second
-      runNow: true, // run immediately other wise it will wait until the time to run.
+      time: 10, // period second : Callback function will call every 10 seconds.
+      runNow: true, // run immediately otherwise it will wait until the time to run.
       command: 'start', // this interval command for start it
       // this our callback function
       callback: (dispatch, getStore, extraArgument) => {
@@ -109,10 +109,10 @@ useEffect(() => {
 
   return () => {
     dispatch({
-      type: 'INTERVAL', // type has to equal "INTERVAL".
+      type: 'INTERVAL', // The type has to be "INTERVAL".
       payload: {
         name: 'FETCH_FROM_TYPICODE',
-        command: 'stop' // this interval command for start it
+        command: 'stop' // This command stops the interval.
       }
     });
   };
