@@ -51,7 +51,7 @@ dispatch({
         .then(response => response.json())
         .then(json => dispatch({ type: 'FETCH_FROM_TYPICODE_DONE', payload: json }))
         .catch(e => {
-          dispatch({ type: FETCH_FROM_TYPICODE_DONE, payload: e.toString() });
+          dispatch({ type: FETCH_FROM_TYPICODE_ERROR, payload: e.toString() });
         });
     }
   }
@@ -101,7 +101,7 @@ useEffect(() => {
           .then(response => response.json())
           .then(json => dispatch({ type: 'FETCH_FROM_TYPICODE_DONE', payload: json }))
           .catch(e => {
-            dispatch({ type: FETCH_FROM_TYPICODE_DONE, payload: e.toString() });
+            dispatch({ type: FETCH_FROM_TYPICODE_ERROR, payload: e.toString() });
           });
       }
     }
