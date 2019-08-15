@@ -1,0 +1,56 @@
+{
+  "name": "redux-interval-middleware",
+  "version": "1.0.0",
+  "description": "Redux Interval Middleware",
+  "author": "s4l1h",
+  "keywords": [
+    "react.js",
+    "redux",
+    "interval",
+    "setInterval",
+    "clearInterval"
+  ],
+  "main": "lib/redux-interval-middleware.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-eslint": "10.x",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "rollup": "^1.19.3",
+    "rollup-plugin-babel": "^4.3.3"
+  },
+  "files": [
+    "lib/redux-interval-middleware.js",
+    "src"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "clear": "rm lib/*",
+    "test": "jest",
+    "lint": "eslint src/*.js __tests__/*.js --fix",
+    "format": "prettier src/*.js __tests__/*.js --write"
+  },
+  "bugs": {
+    "url": "https://github.com/s4l1h/redux-interval-middleware/issues"
+  },
+  "homepage": "https://github.com/s4l1h/redux-interval-middleware#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s4l1h/redux-interval-middleware.git"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
