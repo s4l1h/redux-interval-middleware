@@ -20,6 +20,8 @@ const createIntervalMiddleware = extraArgument => {
         EasyInterval.start(name);
       } else if (EasyInterval.existData(name) && command === "stop") {
         EasyInterval.stop(name);
+      } else if (EasyInterval.existData(name) && command === "call") {
+        EasyInterval.call(name);
       } else if (command === "stopAll") {
         EasyInterval.stopAll();
       }

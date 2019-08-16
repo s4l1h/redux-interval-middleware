@@ -17,10 +17,10 @@ OR
 ## apply middleware
 
 ```js
-import { createStore, applyMiddleware } from 'redux';
-import intervalMiddleware from 'redux-interval-middleware';
+import { createStore, applyMiddleware } from "redux";
+import intervalMiddleware from "redux-interval-middleware";
 
-const store = createStore(todos, ['Use Redux'], applyMiddleware(intervalMiddleware));
+const store = createStore(todos, ["Use Redux"], applyMiddleware(intervalMiddleware));
 // const store = createStore(todos, ['Use Redux'], applyMiddleware(intervalMiddleware,logger));
 // OR
 // const api = axios ....
@@ -37,19 +37,22 @@ The Middleware catches the type of action equal to INTERVAL.
 
 ### Start
 
+It doesn't make sense if you run start command repeatedly with the same **name** because the **start** command registers the job.
+If you set **runNow** variable to **true** it will call the callback function immediately as well.
+
 ```js
 dispatch({
-  type: 'INTERVAL', // type has to be "INTERVAL".
+  type: "INTERVAL", // type has to be "INTERVAL".
   payload: {
-    name: 'FETCH_FROM_TYPICODE',
+    name: "FETCH_FROM_TYPICODE",
     time: 10, // period second
     runNow: true, // run immediately otherwise it will wait until the time to run.
-    command: 'start', // This command starts interval job
+    command: "start", // This command starts interval job
     // this our callback function
     callback: (dispatch, getStore, extraArgument) => {
-      fetch('https://jsonplaceholder.typicode.com/todos/1')
+      fetch("https://jsonplaceholder.typicode.com/todos/1")
         .then(response => response.json())
-        .then(json => dispatch({ type: 'FETCH_FROM_TYPICODE_DONE', payload: json }))
+        .then(json => dispatch({ type: "FETCH_FROM_TYPICODE_DONE", payload: json }))
         .catch(e => {
           dispatch({ type: FETCH_FROM_TYPICODE_ERROR, payload: e.toString() });
         });
@@ -62,10 +65,10 @@ dispatch({
 
 ```js
 dispatch({
-  type: 'INTERVAL', // type has to be "INTERVAL".
+  type: "INTERVAL", // type has to be "INTERVAL".
   payload: {
-    name: 'FETCH_FROM_TYPICODE',
-    command: 'stop' // This command stops interval job
+    name: "FETCH_FROM_TYPICODE",
+    command: "stop" // This command stops interval job
   }
 });
 ```
@@ -74,9 +77,21 @@ dispatch({
 
 ```js
 dispatch({
-  type: 'INTERVAL', // type has to be "INTERVAL".
+  type: "INTERVAL", // type has to be "INTERVAL".
   payload: {
-    command: 'stopAll' // This command stops all interval jobs
+    command: "stopAll" // This command stops all interval jobs
+  }
+});
+```
+
+### call - This command will call your callback function manually.
+
+```js
+dispatch({
+  type: "INTERVAL", // type has to be "INTERVAL".
+  payload: {
+    name: "FETCH_FROM_TYPICODE",
+    command: "call" // This command calls the callback function manually
   }
 });
 ```
@@ -85,21 +100,20 @@ dispatch({
 
 ```js
 useEffect(() => {
-
   const ID = 1; // it might be coming from url
 
   dispatch({
-    type: 'INTERVAL', // The type has to be "INTERVAL".
+    type: "INTERVAL", // The type has to be "INTERVAL".
     payload: {
-      name: 'FETCH_FROM_TYPICODE',
+      name: "FETCH_FROM_TYPICODE",
       time: 10, // period second : Callback function will call every 10 seconds.
       runNow: true, // run immediately otherwise it will wait until the time to run.
-      command: 'start', // this interval command for start it
+      command: "start", // this interval command for start it
       // this our callback function
       callback: (dispatch, getStore, extraArgument) => {
-        fetch('https://jsonplaceholder.typicode.com/todos/${ID}')
+        fetch("https://jsonplaceholder.typicode.com/todos/${ID}")
           .then(response => response.json())
-          .then(json => dispatch({ type: 'FETCH_FROM_TYPICODE_DONE', payload: json }))
+          .then(json => dispatch({ type: "FETCH_FROM_TYPICODE_DONE", payload: json }))
           .catch(e => {
             dispatch({ type: FETCH_FROM_TYPICODE_ERROR, payload: e.toString() });
           });
@@ -109,10 +123,10 @@ useEffect(() => {
 
   return () => {
     dispatch({
-      type: 'INTERVAL', // The type has to be "INTERVAL".
+      type: "INTERVAL", // The type has to be "INTERVAL".
       payload: {
-        name: 'FETCH_FROM_TYPICODE',
-        command: 'stop' // This command stops the interval.
+        name: "FETCH_FROM_TYPICODE",
+        command: "stop" // This command stops the interval.
       }
     });
   };
